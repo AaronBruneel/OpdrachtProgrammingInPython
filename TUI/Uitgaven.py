@@ -5,6 +5,8 @@ Created on Tue Nov 11 18:16:27 2025
 @author: Aaron.Bruneel
 """
 import sys
+import Model.Persoon
+import DB.dbinteractie
 
 def hoofdmenu():
     print("""maak een keuze uit één van onderstaande en mogelijkheden en geef het nummer in:
@@ -22,13 +24,23 @@ def hoofdmenu():
         print("deze functie werkt nog niet")
         #functie invoegen
     elif keuze == 3:
-        print("deze functie werkt nog niet")
+        persoontoevoegen()
         #functie invoegen
     elif keuze == 4:
         print("deze functie werkt nog niet")
         #functie invoegen
     elif keuze == 5:
         sys.exit(0)
+    else:
+        print('geef een nummer van 1 tot 5')
 
+def persoontoevoegen():
+    """Vraagt de gebruiker om gegevens en voegt een persoon toe aan de database."""
+    naam = input("Voer de naam van de persoon in: ")
+    bankrekeningnr = input("Voer het bankrekeningnummer in: ")
+    functie = input("Voer de functie van de persoon in: ")
     
+    persoon = Model.Persoon.Persoon(naam, bankrekeningnr, functie)
+    DB.dbinteractie.persoontoevoegendb(persoon)
     
+    print(f"Persoon {naam} toegevoegd aan de database!")

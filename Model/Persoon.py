@@ -9,7 +9,7 @@ class Persoon:
     
     def __init__(self,naam,bankrekeningnr,functie):
         self.naam = naam
-        self.banrekeningnr = bankrekeningnr
+        self.bankrekeningnr = bankrekeningnr
         self.functie = functie
         
  
