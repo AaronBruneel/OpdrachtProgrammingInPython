@@ -14,13 +14,22 @@ def get_connection() -> sqlite3.Connection:
     return conn
 
 def persoontoevoegendb(persoon: Persoon):
-   conn = get_connection()
-   cursor = conn.cursor()
-   cursor.execute("""
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
             INSERT INTO Persoon
             (Naam, Bankrekeningnr, Functie)
             VALUES (?, ?, ?)
             """, (persoon.naam, persoon.bankrekeningnr, persoon.functie))
+    conn.commit()
+    conn.close()   
 
-   conn.commit()
-   conn.close()
+
+def persoonAanwezigInDb(naam):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(
+             "SELECT naam FROM Persoon WHERE naam = ?", (naam,))
+    gevonden = cursor.fetchone()
+    conn.close()   
+    return gevonden is not None
