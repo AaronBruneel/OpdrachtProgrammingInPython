@@ -12,8 +12,3 @@ class Persoon:
         self.bankrekeningnr = bankrekeningnr
         self.functie = functie
         
- 
-        
-        
-
-
