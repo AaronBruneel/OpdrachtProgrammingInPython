@@ -42,6 +42,9 @@ def get_connection() -> sqlite3.Connection:
 
 6. Voer de code uit:
     python main.py
+
+7. extra info: er zit reeds een testdabase in de repo. Het overzicht van de uitgaven zal een csv creëeren 
+   in de repo folder
     
     
 ## Op de planning 
