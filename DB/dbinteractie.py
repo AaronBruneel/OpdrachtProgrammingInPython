@@ -30,7 +30,7 @@ def persoonAanwezigInDb(naam):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute(
-             "SELECT naam FROM Persoon WHERE naam = ?", (naam,))
+             "SELECT naam FROM Persoon WHERE LOWER(TRIM(naam)) = LOWER(?)",(naam,))
     gevonden = cursor.fetchone()
     conn.close()   
     return gevonden is not None
@@ -50,6 +50,14 @@ def alleUitgaven():
     conn = get_connection()
     query = "SELECT * FROM Uitgave"
     dataframe= pandas.read_sql_query(query, conn)
-    dataframe.to_csv('output.csv', index=False)
+    dataframe.to_csv('Uitgaven.csv', index=False)
     conn.close() 
+    
+def uitgavenPerPersoon(naam):
+    conn = get_connection()
+    query = "SELECT * FROM Uitgave WHERE Naam = ?"
+    dataframe= pandas.read_sql_query(query, conn, params=(naam,))
+    dataframe.to_csv('UitgavePerPersoon.csv', index=False)
+    conn.close()
+    
     

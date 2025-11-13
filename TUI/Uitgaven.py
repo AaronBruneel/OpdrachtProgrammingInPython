@@ -11,7 +11,8 @@ import datetime
 import Model.Uitgave
 
 def hoofdmenu():
-    print("""maak een keuze uit één van onderstaande en mogelijkheden en geef het nummer van je keuze in:
+    print("""Maak een keuze uit één van onderstaande mogelijkheden 
+          geef het nummer van je keuze in en druk op enter:
           1. Print lijst van alle uitgaven
           2. Print lijst van de uitgaven van een specifiek persoon
           3. Maak nieuwe persoon aan
@@ -21,10 +22,8 @@ def hoofdmenu():
     keuze = int(input("Maak je keuze: \n"))
     if keuze == 1:
         DB.dbinteractie.alleUitgaven()
-        #functie invoegen
     elif keuze == 2:
-        print("deze functie werkt nog niet")
-        #functie invoegen
+        printPerPersoon()
     elif keuze == 3:
         persoonToevoegen()
     elif keuze == 4:
@@ -36,7 +35,7 @@ def hoofdmenu():
 
 def persoonToevoegen():
     
-    naam = (input("Voer je voornaam en acthernaam in: ")).lower()
+    naam = input("Voer je voornaam en acthernaam in: ").lower()
     bankrekeningnr = input("Voer je bankrekeningnummer in: ")
     functie = input("Voer je funtie in (bijvoorbeeld: leider,kok,...): ")
     if DB.dbinteractie.persoonAanwezigInDb(naam):
@@ -48,8 +47,8 @@ def persoonToevoegen():
     
 def uitgaveToevoegen():
     
-    naam = (input("Voer je voornaam en acthernaam in: ")).lower()
-    if  DB.dbinteractie.persoonAanwezigInDb(naam):
+    naam = input("Voer je voornaam en acthernaam in: ").lower()
+    if  not DB.dbinteractie.persoonAanwezigInDb(naam):
         print('Deze persoon bestaat nog niet in de database, gelieve je eerst toe te voegen (keuze 3)')
     else:
         bedrag = float(input("Voer het bedrag in: "))
@@ -60,3 +59,7 @@ def uitgaveToevoegen():
         uitgave = Model.Uitgave.Uitgave(naam,bedrag,datum)
         DB.dbinteractie.uitgaveToevoegendb(uitgave)
         print("Uitgave werd toegevoegd")
+        
+def printPerPersoon():
+    naam = (input("Voer je voornaam en acthernaam in: ")).lower()
+    DB.dbinteractie.uitgavenPerPersoon(naam)

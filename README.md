@@ -43,3 +43,9 @@ def get_connection() -> sqlite3.Connection:
 6. Voer de code uit:
     python main.py
     
+    
+## Op de planning 
+- verwijderen van personen en uitgaven
+- invoeren van try & except blokken
+- verdere gegevens controle bij invoer
+
